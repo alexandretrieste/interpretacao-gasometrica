@@ -1,0 +1,22 @@
+import { Component, OnInit } from '@angular/core';
+import { PacienteService } from '../paciente.service';
+
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
+})
+export class DashboardComponent implements OnInit {
+  pacientes: Paciente[] = [];
+
+  constructor(private pacienteService: PacienteService) { }
+
+  ngOnInit(): void {
+    this.getPacientes();
+  }
+
+  getPacientes(): void {
+    this.pacienteService.getPacientes()
+      .subscribe(pacientes => this.pacientes = pacientes.slice(1, 5));
+  }
+}
